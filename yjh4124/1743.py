@@ -55,4 +55,4 @@ for r in range(n):
                 result.append(cnt)
                 max_re=max(max_re, cnt)
 # print(result)
-print(max_re)
+print(max_res)
