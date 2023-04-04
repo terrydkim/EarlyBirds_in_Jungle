@@ -3,32 +3,36 @@ input = sys.stdin.readline
 sys.setrecursionlimit(10**9)
 n, m, k = map(int, input().split())
 
+graph = [[0]*(m+1) for i in range(n+1)]
 visited = [[0]*(m+1) for i in range(n+1)]
 
 for i in range(k):
     a,b = map(int,input().split())
-    visited[a][b] = 1
+    graph[a][b] = 1
 # matrix = [list(map(int, input().split())) for i in range(k)]
 
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
-
-cnt = 1
 
 def dfs(x, y):
     global cnt
     for i in range(4):
         nx = x+dx[i]
         ny = y+dy[i]
-        if 0 <= nx < n and 0 <= ny <m and visited[nx][ny] == 0:
-            dfs(nx,ny)
-            visited[nx][ny] = 0
-            cnt += 1
-    return cnt
+        if 0 <= nx < n+1 and 0 <= ny < m+1 :
+            if graph[nx][ny] == 1 and visited[nx][ny] == 0:
+                visited[nx][ny] = 1
+                dfs(nx,ny)
+                cnt += 1
 
+res = 0
 for i in range(n+1):
     for j in range(m+1):
-        a
+        if graph[i][j] == 1 and visited[i][j] == 0:
+            cnt = 0
+            dfs(i,j)
+            res = max(res,cnt)
+print(res)
 
 
 
