@@ -1,5 +1,3 @@
-# 반례 케이스를 잡지 못했습니다!😂
-
 import sys
 input = sys.stdin.readline
 
@@ -13,7 +11,9 @@ for i in range(n):
     else:
         scehdule.append((a,b))
 dp = [0 for i in range(n+1)]
-for i in range(len(scehdule)):
-    end_day = i + scehdule[i][0]
-    dp[end_day] = max(dp[end_day], dp[i] + scehdule[i][1])
-print(max(dp))
+for i in range(n):
+    for j in range(i + scehdule[i][0], n+1):
+        if dp[j] < dp[i] + scehdule[i][1]: 
+            dp[j] = dp[i] + scehdule[i][1]
+print(dp[-1])
+#https://great-park.tistory.com/48
