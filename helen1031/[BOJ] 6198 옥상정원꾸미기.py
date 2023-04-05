@@ -10,12 +10,10 @@ stack = []
 tot = 0
 
 for building in buildings:
-    while stack and building <= stack[-1]:
+    while stack and stack[-1] <= building:
         stack.pop()
-    # stack에 들어가는거 - 높이가 낮은거, 아무것도 없을 때
     stack.append(building)
 
-    tot += len(stack)
-
-
-
+    tot += len(stack) - 1
+    
+print(tot)
