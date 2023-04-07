@@ -11,6 +11,7 @@ for i in H:
     while stack and stack[-1] <= i:
         stack.pop()
     stack.append(i)
+    # 내가 관찰 당하는 옥상 수
     cnt += len(stack)-1
 print(cnt)
 
