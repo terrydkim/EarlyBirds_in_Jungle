@@ -8,8 +8,6 @@ truck_arr = list(map(int, input().split()))
 # 다리 위에 있는 트럭의 무게를 체크하고,
 # 다리에 다음 트럭을 올릴 수 있는지 체크하고, 가능하면 올리고 day를 더해준다
 
-isStop = False
-onthe = 0
 bridge_q = deque()
 day = 0
 idx = 0
