@@ -10,61 +10,49 @@ a = [list(map(int, input().split())) for _ in range(3)]
 
 time = 0
 
+def cal(a, dir):
+    new_a = []
+    maxlen = 0
+
+    if dir == "C":
+        a = list(zip(*a))
+
+    for row in a:
+        counter = Counter(row)
+
+        tmp = []
+        for cntr in counter.items():
+            if cntr[0] == 0:
+                continue
+            tmp.append((cntr[0], cntr[1]))
+        tmp.sort(key=lambda x: (x[1], x[0]))
+
+        new_row = []
+        for t in tmp:
+            new_row.append(t[0])
+            new_row.append(t[1])
+        new_a.append(new_row)
+        maxlen = max(maxlen, len(new_row))
+
+    for row in new_a:
+        while len(row) < maxlen:
+            row.append(0)
+        if len(row) > 100:
+            row = row[:100]
+    return new_a if dir == "R" else list(zip(*new_a))
+
 while True:
-    if a[r][c] == k:
+    if time > 100:
+        time = -1
         break
 
-    if time == 2:
+    if r < len(a) and c < len(a[0]) and a[r][c] == k:
         break
 
     if len(a) >= len(a[0]):
-        maxc = 0
-        for i, ya in enumerate(a):
-            counter = Counter(ya)
-
-            tmp = []
-            for cntr in counter.items():
-                tmp.append((cntr[0], cntr[1]))
-            tmp.sort(key = lambda x: (x[1], x[0]))
-
-            nya = []
-            for t in tmp:
-                nya.append(t[0])
-                nya.append(t[1])
-            a[i] = nya
-            maxc = max(maxc, len(a[i]))
-
-        for i, ya in enumerate(a):
-            while len(ya) < maxc:
-                ya.append(0)
-
+        a = cal(a, "R")
     else:
-        print(a)
-        maxr = 3
-        for x in range(len(a[0])):
-            ylist = []
-            for y in range(len(a)):
-                ylist.append(a[y][x])
-
-            counter = Counter(ylist)
-            tmp = []
-            for cntr in counter.items():
-                tmp.append((cntr[0], cntr[1]))
-            tmp.sort(key=lambda x: (x[1], x[0]))
-
-            nxa = []
-            for t in tmp:
-                nxa.append(t[0])
-                nxa.append(t[1])
-
-            print(nxa)
-            for i in range(len(nxa)):
-                if i < len(a):
-                    a[i][x] = nxa[i]
-                else:
-                    a.append([nxa[i]])
-            maxr = max(maxr, len(a))
-            print(a)
-
+        a = cal(a, "C")
     time += 1
+
 print(time)
