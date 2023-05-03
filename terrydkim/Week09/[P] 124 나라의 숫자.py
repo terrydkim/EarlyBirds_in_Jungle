@@ -5,10 +5,8 @@ def solution(n):
         a = n % 3
         if a == 0:
             n -= 1
-            answer.append('4')
+            answer.appendleft('4')
         else:
             answer.appendleft(str(a))
         n //= 3
     return ''.join(answer)
-
-print(solution(9))
